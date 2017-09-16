@@ -2448,6 +2448,35 @@ Undocumented.prototype.oauth2SignupUrl = function( redirectTo, fn ) {
 	);
 };
 
+Undocumented.prototype.getPostReactions = function( siteId, postId, page = 1, fn ) {
+	return this.wpcom.req.get(
+		`/sites/${ siteId }/posts/${ postId }/replies?hierarchical=1&number=100&page=${ page }&type=reaction`,
+		fn
+	);
+};
+
+Undocumented.prototype.reactToPost = function( siteId, postId, reaction, comment_text, fn ) {
+	return this.wpcom.req.post(
+		`/sites/${ siteId }/posts/${ postId }/replies/new`,
+		{
+			type: 'reaction',
+			content: [ reaction, comment_text ].join( ' ' ),
+		},
+		fn
+	);
+};
+
+Undocumented.prototype.updatePostReaction = function( siteId, commentId, reaction, comment_text, fn ) {
+	return this.wpcom.req.post(
+		`/sites/${ siteId }/comments/${ commentId }`,
+		{
+			type: 'reaction',
+			content: [ reaction, comment_text ].join( ' ' ),
+		},
+		fn
+	);
+};
+
 /**
  * Expose `Undocumented` module
  */
