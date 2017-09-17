@@ -2449,8 +2449,19 @@ Undocumented.prototype.oauth2SignupUrl = function( redirectTo, fn ) {
 };
 
 Undocumented.prototype.getPostReactions = function( siteId, postId, page = 1, fn ) {
+	if ( ! siteId || ! postId ) {
+		return;
+	}
+
 	return this.wpcom.req.get(
-		`/sites/${ siteId }/posts/${ postId }/replies?hierarchical=1&number=100&page=${ page }&type=reaction`,
+		`/sites/${ siteId }/posts/${ postId }/replies`,
+		{
+			hierarchical: 1,
+			number: 100,
+			page,
+			status: 'approved',
+			type: 'reaction',
+		},
 		fn
 	);
 };
