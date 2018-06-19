@@ -165,7 +165,7 @@
     "wpcom-oauth": "0.3.3",
     "wpcom-proxy-request": "4.0.5",
     "wpcom-xhr-request": "1.1.1",
-    "snyk": "^1.46.0"
+    "snyk": "^1.83.0"
   },
   "engines": {
     "node": "6.11.2",
@@ -236,7 +236,8 @@
     "translate": "i18n-calypso --format pot --output-file ./calypso-strings.pot -e date \"**/*.js\" \"**/*.jsx\" \"!build/**\" \"!node_modules/**\" \"!public/**\" \"!client/extensions/**\"",
     "update-deps": "npm run -s rm -- node_modules && npm run -s rm -- npm-shrinkwrap.json && npm install && npm install && npm shrinkwrap --dev",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "prepare": "npm run snyk-protect"
   },
   "devDependencies": {
     "5to6-codemod": "5to6/5to6-codemod#v1.7.0",
